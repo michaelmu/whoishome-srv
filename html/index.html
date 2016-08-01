@@ -1,0 +1,38 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+    		$.getJSON('devices.json', function(d) {
+			$('#summary').html('Last updated: ' + d[0].event_ts);
+			$.each(d, function(entry) {
+				$('#results tr:last').after(
+						'<tr>' +
+						'<td>' + this.name + '</td>' +
+						'<td>' + this.ip + '</td>' +
+						'<td>' + this.mac + '</td>' +
+						'<td>' + this.lease_time_remaining + '</td>' +
+						'</tr>');
+			});
+		});
+	});
+	</script>
+</head>
+
+<body>
+	<div>
+		<table id="results">
+			<tr>
+				<th>Name</th>
+				<th>IP</th>
+				<th>MAC</th>
+				<th>Lease Time Remaining</th>
+			</tr>
+		</table>
+	</div>
+	<hr/>
+	<div id="summary">
+	</div>
+</body>
+
+</html>
